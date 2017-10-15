@@ -1,31 +1,63 @@
 # {{ ansible_managed }}
 
 {% for name,config in smartd_devices.items() | d([]) %}
-{{ name -}}
-{{ " -d " }}{{ config.type|d(smartd_default_type) -}}
-{{ " -n " }}{{ config.nocheck|d(smartd_default_nocheck) -}}
-{{ " -T " }}{{ config.check_type | d(smartd_default_check_type) -}}
-{% if 'ata_offline_testing' in config %}{{ " -o " }}{{ config.ata_offline_testing -}}{% endif %}
-{{ " -S " }}{% if config.attribute_autosave | d(smartd_default_attribute_autosave) %}{{ "on" -}}{% else %}{{ "off" -}}{% endif %}
-{% if config.check_health_return_status | d(smartd_default_check_health_return_status) %}{{ " -H" -}}{% endif %}
-{% for error_type in config.report_error_types | d(smartd_default_report_error_types) %}
-{{ " -l " }}{{ error_type -}}
-{% endfor %}
-{% for option in config.non_smart_settings | d(smartd_default_non_smart_settings) %}
-{{ " -e " }}{{ option -}}
-{% endfor %}
-{% if config.test_schedule | d(smartd_default_test_schedule) %}{{ " -s " }}{{ config.test_schedule | d(smartd_default_test_schedule) -}}{% endif %}
-{% if 'mail_recipients' in config %}{{ " -m " }}{{ config.mail_recipients | join(",") }}{{ " -M " }}{{ config.mail_frequency | d(smartd_default_mail_frequency) -}}{% if config.mail_script %}{{ " -M " }}{{ config.mail_script -}}{% endif %}{% endif %}
-{% if config.report_ata_failure | d(smartd_default_report_ata_failure) %}{{ " -f" -}}{% endif %}
-{% if config.report_ata_prefail | d(smartd_default_report_ata_prefail) %}{{ " -p" -}}{% endif %}
-{% if config.report_ata_usage | d(smartd_default_report_ata_usage) %}{{ " -u" -}}{% endif %}
-{% for id in config.ignore_ata_failure_ids | d([]) %}{{ " -i " }}{{ id -}}{% endfor %}
-{% for id in config.ignore_ata_usage_ids | d([]) %}{{ " -I " }}{{ id -}}{% endfor %}
-{% for id in config.report_raw_ids | d([]) %}{{ " -R " }}{{ id -}}{% endfor %}
-{{ " -C " }}{{ config.ata_pending_id | d(smartd_default_ata_pending_id) -}}
-{{ " -U " }}{{ config.ata_uncorrectable_id | d(smartd_default_ata_uncorrectable_id) -}}
-{{ " -W " }}{{ config.temperature_report_diff | d(smartd_default_temperature_report_diff) }}{{ "," }}{{ config.temperature_report_info | d(smartd_default_temperature_report_info) }}{{ "," }}{{ config.temperature_report_crit | d(smartd_default_temperature_report_crit) -}}
-{% for bug in config.firmware_bugs | d([]) %}{{ " -F " }}{{ bug -}}{% endfor %}
-{% for format in config.vendor_formats | d([]) %}{{ " -v " }}{{ format -}}{% endfor %}
-{{ " -P " }}{{ config.preset_mode | d(smartd_default_preset_mode) -}}
+	{{- name -}}
+	{{- " -d " }}{{ config.type|d(smartd_default_type) -}}
+	{{- " -n " }}{{ config.nocheck|d(smartd_default_nocheck) -}}
+	{{- " -T " }}{{ config.check_type | d(smartd_default_check_type) -}}
+	{%- if 'ata_offline_testing' in config %}
+		{{- " -o " }}{{ config.ata_offline_testing -}}
+	{%- endif %}
+	{{- " -S " }}{% if config.attribute_autosave | d(smartd_default_attribute_autosave) %}
+		{{- "on" -}}
+	{%- else %}
+		{{- "off" -}}
+	{%- endif %}
+	{%- if config.check_health_return_status | d(smartd_default_check_health_return_status) %}
+		{{- " -H" -}}
+	{%- endif %}
+	{%- for error_type in config.report_error_types | d(smartd_default_report_error_types) %}
+		{{- " -l " }}{{ error_type -}}
+	{%- endfor %}
+	{%- for option in config.non_smart_settings | d(smartd_default_non_smart_settings) %}
+		{{- " -e " }}{{ option -}}
+	{%- endfor %}
+	{%- if config.test_schedule | d(smartd_default_test_schedule) %}
+		{{- " -s " }}{{ config.test_schedule | d(smartd_default_test_schedule) -}}
+	{%- endif %}
+	{%- if 'mail_recipients' in config %}
+		{{- " -m " }}{{ config.mail_recipients | join(",") }}
+		{{- " -M " }}{{ config.mail_frequency | d(smartd_default_mail_frequency) -}}
+		{%- if config.mail_script %}
+			{{- " -M " }}{{ config.mail_script -}}
+		{%- endif %}
+	{%- endif %}
+	{%- if config.report_ata_failure | d(smartd_default_report_ata_failure) %}
+		{{- " -f" -}}
+	{%- endif %}
+	{%- if config.report_ata_prefail | d(smartd_default_report_ata_prefail) %}
+		{{- " -p" -}}
+	{%- endif %}
+	{%- if config.report_ata_usage | d(smartd_default_report_ata_usage) %}
+		{{- " -u" -}}
+	{%- endif %}
+	{%- for id in config.ignore_ata_failure_ids | d([]) %}
+		{{- " -i " }}{{ id -}}
+	{%- endfor %}
+	{%- for id in config.ignore_ata_usage_ids | d([]) %}
+		{{- " -I " }}{{ id -}}
+	{%- endfor %}
+	{%- for id in config.report_raw_ids | d([]) %}
+		{{- " -R " }}{{ id -}}
+	{%- endfor %}
+	{{- " -C " }}{{ config.ata_pending_id | d(smartd_default_ata_pending_id) -}}
+	{{- " -U " }}{{ config.ata_uncorrectable_id | d(smartd_default_ata_uncorrectable_id) -}}
+	{{- " -W " }}{{ config.temperature_report_diff | d(smartd_default_temperature_report_diff) }}{{ "," }}{{ config.temperature_report_info | d(smartd_default_temperature_report_info) }}{{ "," }}{{ config.temperature_report_crit | d(smartd_default_temperature_report_crit) -}}
+	{%- for bug in config.firmware_bugs | d([]) %}
+		{{- " -F " }}{{ bug -}}
+	{%- endfor %}
+	{%- for format in config.vendor_formats | d([]) %}{{ " -v " }}
+		{{- format -}}
+	{%- endfor %}
+	{{- " -P " }}{{ config.preset_mode | d(smartd_default_preset_mode) -}}
 {% endfor %}
