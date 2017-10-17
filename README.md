@@ -6,13 +6,13 @@ In the default configuration, all devices will be tested and observed, but no ma
 ## Requirements
 
 A Debian or Arch based distribution.
-`/usr/bin/mail` has to exist and be configured to be able to send report mails.
+`/usr/bin/mail` has to exist and be configured to be able to send report mails if that is desired.
 
 ## Role Variables
 
-This role only has one top-level var called `smartd_devices`, which is a dict of dicts to specify device monitoring.
+This role only uses one top-level var called `smartd_devices`, which is a dict of dicts to specify device monitoring.
 Each key corresponds to one drive path, while `DEVICESCAN` (the only default entry) may be used to scan for devices.
-After it, all further lines are ignored by smartd, so you probably want to insert it at the end or not at all.
+After a `DEVICESCAN` entry, all further lines are ignored by smartd, so you probably want to insert it at the end or not at all.
 
 All possible options inside the dict are briefly described here. 
 You can find a detailed wall-of-text for each one on the [smartd man page](https://www.smartmontools.org/browser/trunk/smartmontools/smartd.conf.5.in).

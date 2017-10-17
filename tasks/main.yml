@@ -11,12 +11,12 @@
   changed_when: false
   when: "ansible_pkg_mgr == 'pacman'"
 
-- name: Install smartmontools (apt)
+- name: Install smartmontools package (apt)
   apt:
     name: smartmontools
   when: ansible_pkg_mgr == "apt"
 
-- name: Install smartmontools (pacman)
+- name: Install smartmontools package (pacman)
   pacman:
     name: smartmontools
   when: ansible_pkg_mgr == "pacman"
@@ -30,3 +30,4 @@
     mode: 0644
     backup: yes
   notify: Restart smartd
+...

@@ -1,3 +1,4 @@
+---
 smartd_devices:
   DEVICESCAN: {}
 smartd_default_type: auto
@@ -24,3 +25,4 @@ smartd_default_temperature_report_diff: 10
 smartd_default_temperature_report_info: 45
 smartd_default_temperature_report_crit: 50
 smartd_default_preset_mode: use
+...
