@@ -20,11 +20,6 @@ galaxy_info:
       versions:
         - all
         - any
-    - name: Debian
-      versions:
-        - jessie
-        - stretch
-        - buster
 
   galaxy_tags:
     - smartd
