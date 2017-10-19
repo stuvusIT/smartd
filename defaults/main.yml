@@ -1,0 +1,28 @@
+---
+smartd_devices:
+  DEVICESCAN: {}
+smartd_default_type: auto
+smartd_default_nocheck: standby,15,q
+smartd_default_check_type: normal
+smartd_default_attribute_autosave: True
+smartd_default_check_health_return_status: True
+smartd_default_report_error_types:
+  - error
+  - xerror
+  - selftest
+  - offlinests
+  - scterc,0,0
+smartd_default_non_smart_settings:
+  - lookahead,on
+smartd_default_test_schedule: (L/../../6/01|S/../.././02)
+smartd_default_mail_frequency: diminishing
+smartd_default_report_ata_failure: True
+smartd_default_report_ata_prefail: True
+smartd_default_report_ata_usage: False
+smartd_default_ata_pending_id: 197+
+smartd_default_ata_uncorrectable_id: 198+
+smartd_default_temperature_report_diff: 10
+smartd_default_temperature_report_info: 45
+smartd_default_temperature_report_crit: 50
+smartd_default_preset_mode: use
+...

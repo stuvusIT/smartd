@@ -1,0 +1,33 @@
+---
+- name: Update repository cache (apt)
+  apt:
+    update_cache: yes
+  changed_when: false
+  when: "ansible_pkg_mgr == 'apt'"
+
+- name: Update repository cache (pacman)
+  pacman:
+    update_cache: yes
+  changed_when: false
+  when: "ansible_pkg_mgr == 'pacman'"
+
+- name: Install smartmontools package (apt)
+  apt:
+    name: smartmontools
+  when: ansible_pkg_mgr == "apt"
+
+- name: Install smartmontools package (pacman)
+  pacman:
+    name: smartmontools
+  when: ansible_pkg_mgr == "pacman"
+  
+- name: Create smartd configuration
+  template:
+    src: smartd.conf.j2
+    dest: /etc/smartd.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  notify: Restart smartd
+...

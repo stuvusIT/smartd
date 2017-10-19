@@ -1,0 +1,34 @@
+---
+galaxy_info:
+  author: Michel Weitbrecht
+  description: Installs smartmontools and configures smartd
+  company: stuvus (https://stuvus.uni-stuttgart.de)
+
+  license: CC-BY-SA
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+        - yakkety
+        - zesty
+        - artful
+    - name: ArchLinux
+      versions:
+        - all
+        - any
+
+  galaxy_tags:
+    - smartd
+    - monitoring
+    - drive
+    - hdd
+    - sata
+    - ata
+    - scsi
+
+dependencies: []
+...

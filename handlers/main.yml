@@ -1,0 +1,6 @@
+---
+- name: Restart smartd
+  service:
+    name: smartd.service
+    state: restarted
+...
