@@ -5,7 +5,7 @@ In the default configuration, all devices will be tested and observed, but no ma
 
 ## Requirements
 
-A Debian or Arch based distribution.
+An `apt` or `pacman` based linux distribution.
 `/usr/bin/mail` has to exist and be configured to be able to send report mails if that is desired.
 
 ## Role Variables
