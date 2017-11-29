@@ -29,7 +29,7 @@
 		{{- " -m " }}{{ config.mail_recipients | join(",") }}
 		{{- " -M " }}{{ config.mail_frequency | d(smartd_default_mail_frequency) -}}
 		{%- if config.mail_script is defined %}
-			{{- " -M " }}{{ config.mail_script -}}
+			{{- " -M exec " }}{{ config.mail_script -}}
 		{%- endif %}
 	{%- endif %}
 	{%- if config.report_ata_failure | d(smartd_default_report_ata_failure) %}
