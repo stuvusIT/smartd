@@ -28,7 +28,7 @@
 	{%- if 'mail_recipients' in config %}
 		{{- " -m " }}{{ config.mail_recipients | join(",") }}
 		{{- " -M " }}{{ config.mail_frequency | d(smartd_default_mail_frequency) -}}
-		{%- if config.mail_script %}
+		{%- if config.mail_script is defined %}
 			{{- " -M exec " }}{{ config.mail_script -}}
 		{%- endif %}
 	{%- endif %}
