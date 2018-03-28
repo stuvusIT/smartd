@@ -20,6 +20,10 @@ galaxy_info:
       versions:
         - all
         - any
+    - name: Fedora
+      versions:
+        - all
+        - any
 
   galaxy_tags:
     - smartd
