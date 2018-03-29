@@ -3,4 +3,5 @@
   service:
     name: smartd.service
     state: restarted
+    enabled: yes
 ...
