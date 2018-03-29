@@ -17,20 +17,10 @@
   changed_when: false
   when: "ansible_pkg_mgr == 'pacman'"
 
-- name: Install smartmontools package (apt)
-  apt:
+- name: Install smartmontools
+  package:
     name: smartmontools
-  when: ansible_pkg_mgr == "apt"
-
-- name: Install smartmontools package (pacman)
-  pacman:
-    name: smartmontools
-  when: ansible_pkg_mgr == "pacman"
-
-- name: Install smartmontools package (dnf)
-  dnf:
-    name: smartmontools
-  when: ansible_pkg_mgr == "dnf"
+  when: ansible_pkg_mgr in ["apt", "pacman", "dnf"]
 
 - name: Create smartd configuration
   template:
