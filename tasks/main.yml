@@ -1,21 +1,8 @@
 ---
-
 # Check vars/main.yml to set distro-specific config file location
 - name: Set the smartd configuration file path
   set_fact:
     smartd_config_path: "{{ smartd_possible_config_paths[ansible_distribution] | default(smartd_possible_config_paths.default) }}"
-
-- name: Update repository cache (apt)
-  apt:
-    update_cache: yes
-  changed_when: false
-  when: "ansible_pkg_mgr == 'apt'"
-
-- name: Update repository cache (pacman)
-  pacman:
-    update_cache: yes
-  changed_when: false
-  when: "ansible_pkg_mgr == 'pacman'"
 
 - name: Install smartmontools
   package:
@@ -31,4 +18,3 @@
     mode: 0644
     backup: yes
   notify: Restart smartd
-...
