@@ -24,6 +24,9 @@ galaxy_info:
       versions:
         - all
         - any
+    - name: Debian
+      versions:
+        - stretch
 
   galaxy_tags:
     - smartd
