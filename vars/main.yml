@@ -1,4 +1,5 @@
 ---
 smartd_possible_config_paths:
+  CentOS: /etc/smartmontools/smartd.conf
   Fedora: /etc/smartmontools/smartd.conf
   default: /etc/smartd.conf

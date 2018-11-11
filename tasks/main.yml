@@ -7,7 +7,7 @@
 - name: Install smartmontools
   package:
     name: smartmontools
-  when: ansible_pkg_mgr in ["apt", "pacman", "dnf"]
+  when: ansible_pkg_mgr in ["apt", "pacman", "dnf", "yum"]
 
 - name: Create smartd configuration
   template:
