@@ -27,6 +27,9 @@ galaxy_info:
     - name: Debian
       versions:
         - stretch
+    - name: Centos
+      versions:
+        - 7
 
   galaxy_tags:
     - smartd
