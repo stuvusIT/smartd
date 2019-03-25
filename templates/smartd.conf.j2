@@ -8,7 +8,9 @@
     {%- if 'never' not in config.nocheck|d(smartd_default_nocheck) %}
 	    {{- " -n " }}{{ config.nocheck|d(smartd_default_nocheck) -}}
     {%- endif %}
-	{{- " -T " }}{{ config.check_type | d(smartd_default_check_type) -}}
+    {%- if 'normal' != config.check_type|d(smartd_default_check_type) %}
+	    {{- " -T " }}{{ config.check_type | d(smartd_default_check_type) -}}
+    {%- endif %}
 	{%- if 'ata_offline_testing' in config %}
 		{{- " -o " }}{{ config.ata_offline_testing -}}
 	{%- endif %}
