@@ -60,10 +60,14 @@
 	{%- for id in config.report_raw_ids | d([]) %}
 		{{- " -R " }}{{ id -}}
 	{%- endfor %}
-	{{- " -C " }}{{ config.ata_pending_id | d(smartd_default_ata_pending_id) -}}
-	{{- " -U " }}{{ config.ata_uncorrectable_id | d(smartd_default_ata_uncorrectable_id) -}}
-	{{- " -W " }}{{ config.temperature_report_diff | d(smartd_default_temperature_report_diff) }}{{ "," }}{{ config.temperature_report_info | d(smartd_default_temperature_report_info) }}{{ "," }}{{ config.temperature_report_crit | d(smartd_default_temperature_report_crit) -}}
-	{%- for bug in config.firmware_bugs | d([]) %}
+    {%- if '197' != config.ata_pending_id|d(smartd_default_ata_pending_id) %}
+	    {{- " -C " }}{{ config.ata_pending_id | d(smartd_default_ata_pending_id) -}}
+    {%- endif %}
+    {%- if '198' != config.ata_uncorrectable_id|d(smartd_default_ata_uncorrectable_id) %}
+	    {{- " -U " }}{{ config.ata_uncorrectable_id | d(smartd_default_ata_uncorrectable_id) -}}
+    {%- endif %}
+    {{- " -W " }}{{ config.temperature_report_diff | d(smartd_default_temperature_report_diff) }}{{ "," }}{{ config.temperature_report_info | d(smartd_default_temperature_report_info) }}{{ "," }}{{ config.temperature_report_crit | d(smartd_default_temperature_report_crit) -}}
+    {%- for bug in config.firmware_bugs | d([]) %}
 		{{- " -F " }}{{ bug -}}
 	{%- endfor %}
 	{%- for format in config.vendor_formats | d([]) %}{{ " -v " }}
