@@ -5,7 +5,9 @@
 	{%- if config.type|d(smartd_default_type) != 'auto' %}
         {{- " -d " }}{{ config.type|d(smartd_default_type) -}}
     {%- endif %}
-	{{- " -n " }}{{ config.nocheck|d(smartd_default_nocheck) -}}
+    {%- if 'never' not in config.nocheck|d(smartd_default_nocheck) %}
+	    {{- " -n " }}{{ config.nocheck|d(smartd_default_nocheck) -}}
+    {%- endif %}
 	{{- " -T " }}{{ config.check_type | d(smartd_default_check_type) -}}
 	{%- if 'ata_offline_testing' in config %}
 		{{- " -o " }}{{ config.ata_offline_testing -}}
