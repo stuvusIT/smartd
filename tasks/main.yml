@@ -18,3 +18,8 @@
     mode: 0644
     backup: yes
   notify: Restart smartd
+
+- name: Check smartd service is started
+  service:
+    name: smartd.service
+    state: started
