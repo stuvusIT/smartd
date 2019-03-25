@@ -73,5 +73,7 @@
 	{%- for format in config.vendor_formats | d([]) %}{{ " -v " }}
 		{{- format -}}
 	{%- endfor %}
-	{{- " -P " }}{{ config.preset_mode | d(smartd_default_preset_mode) -}}{{'\n'}}
+    {%- if 'use' != config.preset_mode|d(smartd_default_preset_mode) %}
+	    {{- " -P " }}{{ config.preset_mode | d(smartd_default_preset_mode) -}}{{'\n'}}
+    {%- endif %}
 {% endfor %}
