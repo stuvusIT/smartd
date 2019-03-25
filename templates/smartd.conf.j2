@@ -23,23 +23,23 @@
 		{{- " -H" -}}
 	{%- endif %}
 	{%- for error_type in config.report_error_types | d(smartd_default_report_error_types) %}
-		{{- " -l " }}{{ error_type -}}
+		{{- " -l " }}{{ error_type -}}{{' \\\n'}}
 	{%- endfor %}
 	{%- for option in config.non_smart_settings | d(smartd_default_non_smart_settings) %}
-		{{- " -e " }}{{ option -}}
+		{{- " -e " }}{{ option -}}{{' \\\n'}}
 	{%- endfor %}
 	{%- if config.test_schedule | d(smartd_default_test_schedule) %}
-		{{- " -s " }}{{ config.test_schedule | d(smartd_default_test_schedule) -}}
+		{{- " -s " }}{{ config.test_schedule | d(smartd_default_test_schedule) -}}{{' \\\n'}}
 	{%- endif %}
 	{%- if 'mail_recipients' in config or smartd_default_mail_recipients %}
         {%- if 'mail_recipients' in config %}
-		{{- " -m " }}{{ config.mail_recipients | join(",") -}}
+		{{- " -m " }}{{ config.mail_recipients | join(",") -}}{{' \\\n'}}
         {%- else %}
-        {{- " -m " }}{{ smartd_default_mail_recipients | join(",") -}}
+        {{- " -m " }}{{ smartd_default_mail_recipients | join(",") -}}{{' \\\n'}}
         {%- endif %}
-		{{- " -M " }}{{ config.mail_frequency | d(smartd_default_mail_frequency) -}}
+		{{- " -M " }}{{ config.mail_frequency | d(smartd_default_mail_frequency) -}}{{' \\\n'}}
 		{%- if config.mail_script | d(smartd_default_mail_script) %}
-			{{- " -M exec " }}{{ config.mail_script | d(smartd_default_mail_script) -}}
+			{{- " -M exec " }}{{ config.mail_script | d(smartd_default_mail_script) -}}{{' \\\n'}}
 		{%- endif %}
 	{%- endif %}
 	{%- if config.report_ata_failure | d(smartd_default_report_ata_failure) %}
@@ -52,13 +52,13 @@
 		{{- " -u" -}}
 	{%- endif %}
 	{%- for id in config.ignore_ata_failure_ids | d([]) %}
-		{{- " -i " }}{{ id -}}
+		{{- " -i " }}{{ id -}}{{' \\\n'}}
 	{%- endfor %}
 	{%- for id in config.ignore_ata_usage_ids | d([]) %}
-		{{- " -I " }}{{ id -}}
+		{{- " -I " }}{{ id -}}{{' \\\n'}}
 	{%- endfor %}
 	{%- for id in config.report_raw_ids | d([]) %}
-		{{- " -R " }}{{ id -}}
+		{{- " -R " }}{{ id -}}{{' \\\n'}}
 	{%- endfor %}
     {%- if '197' != config.ata_pending_id|d(smartd_default_ata_pending_id) %}
 	    {{- " -C " }}{{ config.ata_pending_id | d(smartd_default_ata_pending_id) -}}
@@ -68,12 +68,13 @@
     {%- endif %}
     {{- " -W " }}{{ config.temperature_report_diff | d(smartd_default_temperature_report_diff) }}{{ "," }}{{ config.temperature_report_info | d(smartd_default_temperature_report_info) }}{{ "," }}{{ config.temperature_report_crit | d(smartd_default_temperature_report_crit) -}}
     {%- for bug in config.firmware_bugs | d([]) %}
-		{{- " -F " }}{{ bug -}}
+		{{- " -F " }}{{ bug -}}{{' \\\n'}}
 	{%- endfor %}
 	{%- for format in config.vendor_formats | d([]) %}{{ " -v " }}
-		{{- format -}}
+		{{- format -}}{{' \\\n'}}
 	{%- endfor %}
     {%- if 'use' != config.preset_mode|d(smartd_default_preset_mode) %}
-	    {{- " -P " }}{{ config.preset_mode | d(smartd_default_preset_mode) -}}{{'\n'}}
+	    {{- " -P " }}{{ config.preset_mode | d(smartd_default_preset_mode) -}}
     {%- endif %}
+    {{'\n\n'}}
 {% endfor %}
