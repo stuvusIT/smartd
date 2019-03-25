@@ -25,11 +25,15 @@
 	{%- if config.test_schedule | d(smartd_default_test_schedule) %}
 		{{- " -s " }}{{ config.test_schedule | d(smartd_default_test_schedule) -}}
 	{%- endif %}
-	{%- if 'mail_recipients' in config %}
-		{{- " -m " }}{{ config.mail_recipients | join(",") }}
+	{%- if 'mail_recipients' in config or smartd_default_mail_recipients %}
+        {%- if 'mail_recipients' in config %}
+		{{- " -m " }}{{ config.mail_recipients | join(",") -}}
+        {%- else %}
+        {{- " -m " }}{{ smartd_default_mail_recipients | join(",") -}}
+        {%- endif %}
 		{{- " -M " }}{{ config.mail_frequency | d(smartd_default_mail_frequency) -}}
-		{%- if config.mail_script is defined %}
-			{{- " -M exec " }}{{ config.mail_script -}}
+		{%- if config.mail_script | d(smartd_default_mail_script) %}
+			{{- " -M exec " }}{{ config.mail_script | d(smartd_default_mail_script) -}}
 		{%- endif %}
 	{%- endif %}
 	{%- if config.report_ata_failure | d(smartd_default_report_ata_failure) %}
