@@ -17,7 +17,7 @@ smartd_default_non_smart_settings:
 smartd_default_test_schedule: (L/../../6/01|S/../.././02)
 smartd_default_mail_frequency: diminishing
 smartd_default_mail_script:
-smartd_default_mail_recipients:
+smartd_default_mail_recipients: []
 smartd_default_report_ata_failure: True
 smartd_default_report_ata_prefail: True
 smartd_default_report_ata_usage: False
