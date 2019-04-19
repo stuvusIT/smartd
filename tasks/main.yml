@@ -19,5 +19,3 @@
     backup: yes
     validate: smartd -q onecheck -c %s
   notify: Restart smartd
-
-
