@@ -16,6 +16,5 @@
     owner: root
     group: root
     mode: 0644
-    backup: yes
     validate: smartd -q onecheck -c %s
   notify: Restart smartd
