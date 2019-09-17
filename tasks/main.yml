@@ -3,18 +3,26 @@
 - name: Set the smartd configuration file path
   set_fact:
     smartd_config_path: "{{ smartd_possible_config_paths[ansible_distribution] | default(smartd_possible_config_paths.default) }}"
+    smartd_file_group: "{{ smartd_possible_file_group[ansible_distribution] | default(smartd_possible_file_group.default) }}"
+    smartd_service_name: "{{ smartd_service_possible_name[ansible_distribution] | default(smartd_service_possible_name.default) }}"
 
 - name: Install smartmontools
   package:
     name: smartmontools
-  when: ansible_pkg_mgr in ["apt", "pacman", "dnf", "yum"]
+  when: ansible_pkg_mgr in ["apt", "pacman", "dnf", "yum", "pkgng"]
 
 - name: Create smartd configuration
   template:
     src: smartd.conf.j2
     dest: "{{ smartd_config_path }}"
     owner: root
-    group: root
+    group: "{{ smartd_file_group }}"
     mode: 0644
     validate: smartd -q onecheck -c %s
   notify: Restart smartd
+
+- name: Enable smartd
+  service:
+    name: "{{ smartd_service_name }}"
+    state: started
+    enabled: yes

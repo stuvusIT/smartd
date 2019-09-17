@@ -2,4 +2,13 @@
 smartd_possible_config_paths:
   CentOS: /etc/smartmontools/smartd.conf
   Fedora: /etc/smartmontools/smartd.conf
+  FreeBSD: /usr/local/etc/smartd.conf
   default: /etc/smartd.conf
+
+smartd_service_possible_name:
+  FreeBSD: smartd
+  default: smartd.service
+
+smartd_possible_file_group:
+  FreeBSD: wheel
+  default: root
