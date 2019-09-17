@@ -30,6 +30,10 @@ galaxy_info:
     - name: Centos
       versions:
         - 7
+    - name: FreeBSD
+      versions:
+        - all
+        - any
 
   galaxy_tags:
     - smartd
