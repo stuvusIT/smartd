@@ -1,6 +1,6 @@
 # smartd
 
-This role installs and configures `smartd`. 
+This role installs and configures `smartd`.
 In the default configuration, all devices will be tested and observed, but no mails will be sent.
 
 ## Requirements
@@ -14,7 +14,7 @@ This role only uses one top-level var called `smartd_devices`, which is a dict o
 Each key corresponds to one drive path, while `DEVICESCAN` (the only default entry) may be used to scan for devices.
 After a `DEVICESCAN` entry, all further lines are ignored by smartd, so you probably want to insert it at the end or not at all.
 
-All possible options inside the dict are briefly described here. 
+All possible options inside the dict are briefly described here.
 You can find a detailed wall-of-text for each one on the [smartd man page](https://www.smartmontools.org/browser/trunk/smartmontools/smartd.conf.5.in).
 
 | Name                         |                Mandatory / Default                | Description                                                                                                                                                                       |
