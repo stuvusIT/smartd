@@ -31,13 +31,16 @@
 	{%- if config.test_schedule | d(smartd_default_test_schedule) %}
 		{{- " -s " }}{{ config.test_schedule | d(smartd_default_test_schedule) -}}{{' \\\n'}}
 	{%- endif %}
-	{%- if 'mail_recipients' in config or smartd_default_mail_recipients %}
-        {{- " -m " }}{{ config.mail_recipients | d(smartd_default_mail_recipients) | join(",") -}}{{' \\\n'}}
-		{{- " -M " }}{{ config.mail_frequency | d(smartd_default_mail_frequency) -}}{{' \\\n'}}
-		{%- if config.mail_script | d(smartd_default_mail_script) %}
-			{{- " -M exec " }}{{ config.mail_script | d(smartd_default_mail_script) -}}{{' \\\n'}}
-		{%- endif %}
+	{%- if "mail_recipients" in config %}
+		{{- " -m " ~ config.mail_recipients | d(smartd_default_mail_recipients) | join(",") ~ " \\\n"}}
 	{%- endif %}
+	{%- for directive in config.mail_directives | d(smartd_default_mail_directives) %}
+		{%- if directive in ["once", "daily", "diminishing"] and "mail_recipients" not in config -%}
+			{{ none }}
+		{%- else -%}
+			{{- " -M " ~ directive ~ " \\\n"}}
+		{%- endif -%}
+	{%- endfor %}
 	{%- if config.report_ata_failure | d(smartd_default_report_ata_failure) %}
 		{{- " -f" -}}
 	{%- endif %}
