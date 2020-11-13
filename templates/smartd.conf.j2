@@ -1,6 +1,24 @@
 # {{ ansible_managed }}
+{% set elements = [] %}
+{% set n_devices = smartd_devices | length %}
+{% if smartd_devices is mapping %}
+	{%- set names = smartd_devices.keys() | list | d([]) %}
+	{%- set configs = smartd_devices.values() | list | d([]) %}
+	{%- for i in range(n_devices) %}
+		{{- elements.append({"name": names[i], "config": configs[i]}) -}}
+	{%- endfor %}
+{% else %}
+	{%- set names = smartd_devices | map(attribute="name") | list | d([]) %}
+	{%- set configs = smartd_devices | map(attribute="config") | list | d([]) %}
+	{%- for i in range(n_devices) %}
+		{{- elements.append({"name": names[i], "config": configs[i]}) -}}
+	{%- endfor %}
+{% endif %}
 
-{% for name,config in smartd_devices.items() | d([]) %}
+
+{% for d in elements | d([]) %}
+{% set name = d.name %}
+{% set config = d.config %}
 	{{- name -}}
 	{%- if config.type|d(smartd_default_type) != 'auto' %}
         {{- " -d " }}{{ config.type|d(smartd_default_type) -}}
