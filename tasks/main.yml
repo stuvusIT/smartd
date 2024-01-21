@@ -1,28 +1,28 @@
 ---
 # Check vars/main.yml to set distro-specific config file location
 - name: Set the smartd configuration file path
-  set_fact:
+  ansible.builtin.set_fact:
     smartd_config_path: "{{ smartd_possible_config_paths[ansible_distribution] | default(smartd_possible_config_paths.default) }}"
     smartd_file_group: "{{ smartd_possible_file_group[ansible_distribution] | default(smartd_possible_file_group.default) }}"
     smartd_service_name: "{{ smartd_service_possible_name[ansible_distribution] | default(smartd_service_possible_name.default) }}"
 
 - name: Install smartmontools
-  package:
+  ansible.builtin.package:
     name: smartmontools
   when: ansible_pkg_mgr in ["apt", "pacman", "dnf", "yum", "pkgng"]
 
 - name: Create smartd configuration
-  template:
+  ansible.builtin.template:
     src: smartd.conf.j2
     dest: "{{ smartd_config_path }}"
     owner: root
     group: "{{ smartd_file_group }}"
-    mode: 0644
+    mode: "0644"
     validate: smartd -q onecheck -c %s
   notify: Restart smartd
 
 - name: Enable smartd
-  service:
+  ansible.builtin.service:
     name: "{{ smartd_service_name }}"
     state: started
-    enabled: yes
+    enabled: true

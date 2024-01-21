@@ -4,8 +4,8 @@ smartd_devices:
 smartd_default_type: auto
 smartd_default_nocheck: standby,15,q
 smartd_default_check_type: normal
-smartd_default_attribute_autosave: True
-smartd_default_check_health_return_status: True
+smartd_default_attribute_autosave: true
+smartd_default_check_health_return_status: true
 smartd_default_report_error_types:
   - error
   - xerror
@@ -18,9 +18,9 @@ smartd_default_test_schedule: (L/../../6/01|S/../.././02)
 smartd_default_mail_frequency: diminishing
 smartd_default_mail_script:
 smartd_default_mail_recipients: []
-smartd_default_report_ata_failure: True
-smartd_default_report_ata_prefail: True
-smartd_default_report_ata_usage: False
+smartd_default_report_ata_failure: true
+smartd_default_report_ata_prefail: true
+smartd_default_report_ata_usage: false
 smartd_default_ata_pending_id: 197+
 smartd_default_ata_uncorrectable_id: 198+
 smartd_default_temperature_report_diff: 10

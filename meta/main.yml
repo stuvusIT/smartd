@@ -6,7 +6,7 @@ galaxy_info:
 
   license: CC-BY-SA
 
-  min_ansible_version: 2.4
+  min_ansible_version: 2.16.2
 
   platforms:
     - name: Ubuntu
@@ -19,11 +19,9 @@ galaxy_info:
     - name: ArchLinux
       versions:
         - all
-        - any
     - name: Fedora
       versions:
         - all
-        - any
     - name: Debian
       versions:
         - stretch
@@ -33,7 +31,9 @@ galaxy_info:
     - name: FreeBSD
       versions:
         - all
-        - any
+    - name: Alpine
+      versions:
+        - all
 
   galaxy_tags:
     - smartd
@@ -45,4 +45,3 @@ galaxy_info:
     - scsi
 
 dependencies: []
-...
